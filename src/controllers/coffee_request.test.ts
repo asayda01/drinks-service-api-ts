@@ -15,7 +15,7 @@ describe("Test home API endpoint request", () => {
 
     const res = await request(app).get("/coffee");
     expect(res.statusCode).toEqual(200);
-    
+
     expect(res.body).toEqual({
 
       drinkType: "Coffee",
@@ -24,5 +24,33 @@ describe("Test home API endpoint request", () => {
     });
 
   });
+
+  test('GET /coffee with different param should return correct object', async () => {
+    
+    const res = await request(app).get('/coffee').query({ coffeeName: 'Macchiato' });
+    
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toEqual({
+
+      drinkType: 'Coffee',
+      name: 'Macchiato',
+
+    });
+
+});
+
+test('GET /coffee with different param should return correct object', async () => {
+    
+  const res = await request(app).get('/coffee').query({ coffeeName: 'Frappuccino' });
+  
+  expect(res.statusCode).toEqual(200);
+  expect(res.body).toEqual({
+
+    drinkType: 'Coffee',
+    name: 'Frappuccino',
+
+  });
+
+});
 
 });
